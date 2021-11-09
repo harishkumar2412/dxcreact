@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-class Welcome extends Component {
+class Welcome extends Component{
 
-    render() {
-        return <h1>welcome mr {this.props.name} your alias is {this.props.alias}</h1>
+    render(){
+        const {name,alias} = this.props
+        
+        return <h1>welcome mr {name} your alias is {alias}</h1>
     }
 
 }
