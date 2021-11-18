@@ -1,32 +1,44 @@
-import React, {useState,useEffect}from 'react'
+import React, {useState,useEffect} from 'react'
 import axios from 'axios'
+
 function DataFetching() {
+    const [post,setPost] = useState({})
+    const [id,setId] = useState(1)
 
-const [posts,setPosts] = useState([])
-//Promise -- Deferred obj in kotlin--
-useEffect(
-    ()=> {
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(res => {
+    /**
+     * ///useEffect is about the lifecycle methods of a class component --
+     *  if you want to use lifecycle methods of a class component in a stateless functional component --then we use useEffect hook
+     */
+    useEffect(    
+        //the arrow function below will get executed after every render
+        () => {
+            axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+            .then( res => {
                 console.log(res)
-                setPosts(res.data)
-
+                setPost(res.data)
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log(err)
             })
-    }
-)
+        },
+        [id] //run this useEffect hook only once ie after componentDidMount
+    )
+
+
 
     return (
         <div>
-            <ul>
-            {
+        <input 
+            type = "text"
+            value = {id}
+            onChange = { e => setId(e.target.value)}
+            />
+            <div>{post.title}</div>
+           {/* <ul>{
                 posts.map(
-                    post => <li key={post.id}> {post.title}</li>
+                    post => <li key = {post.id}>{post.title}</li>
                 )
-            }
-            </ul>
+            }</ul>*/}
         </div>
     )
 }
