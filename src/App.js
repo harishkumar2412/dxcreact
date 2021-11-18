@@ -1,15 +1,18 @@
+import logo from './logo.svg';
 import './App.css';
-import DataFetching from './components/hooks/useeffect/DataFetching';
+
+import ComponentA from './components/hooks/contexthook/ComponentA';
+import React from 'react';
 
 
-
-
-
+export const UserContext = React.createContext()
 
 function App() {
   return (
     <div className="App">
-        <DataFetching/>
+      <UserContext.Provider value = {'harish'} >
+        <ComponentA/>
+     </UserContext.Provider>
     </div>
   );
 }
